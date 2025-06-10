@@ -26,7 +26,9 @@ Ensure you have the following Python packages installed:
 
 You can install them using pip:
 
+```bash
 pip install tensorflow keras numpy pandas scikit-image matplotlib opencv-python
+```
 
 Usage
 
@@ -35,13 +37,16 @@ To train the AV-Net model, follow these steps:
 
 First, generate the train.csv and test.csv files using the csv_generator.py script. This script scans your dataset directory to create the necessary image lists. Make sure your dataset directory structure is set up as expected (e.g., dataset/oct, dataset/octa, dataset/gt).
 
+```bash
 python csv_generator.py
+```
 
 2. Run Training
 
 Execute the main.py script to start the training process. You can customize various hyperparameters and paths using command-line arguments:
 
-python main.py \
+```bash
+python main.py I am running a few minutes late; my previous meeting is running over.
     --learning_rate 0.0001 \
     --epochs 50 \
     --batch_size 32 \
@@ -52,6 +57,7 @@ python main.py \
     --results_dir "AVNet_Training_Results" \
     --train_csv "train.csv" \
     --train_split_ratio 0.8
+```
 
 Command-line Arguments:
 
