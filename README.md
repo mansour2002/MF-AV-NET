@@ -1,32 +1,64 @@
-MF-AV-Net in Python using Keras
+MF-AV-Net
 ===============================================================
 
 Overview
 ------------
-Many retinal diseases affect arteries and veins in different ways. Clinical observations of the retinal vasculature in diabetic retinopathy patients suggest dilation of the veins and constriction of the arteries. Therefore, the differentiation of arteries and veins can provide important information for the diagnosis and monitoring of retinopathies. To examine the retinal vasculature, optical coherence tomography angiography (OCTA) is used. Current methods for artery-vein (AV) pixel-wise classification or segmentation in OCTA require an extensive image processing procedure, which may inhibit clinical deployment.
-
 In this project, we present a fully convolutional network (FCN), MF-AV-Net, that consists of multimodal fusion options and validated it for comparative assessment of different optical coherence tomography (OCT) and OCT-angiography (OCTA) fusion strategies to improve AV segmentation performance in OCTA.
 
-Mansour Abtahi and David Le contributed equally to this project, a similar repository can be found [here](https://github.com/mansour2002/multimodal-avnet).
+This updated repository now features a more modular and flexible training script (main.py) that accepts hyperparameters via command-line arguments, allowing for easier experimentation and deployment. The default loss function for training is now the IoU (Jaccard) loss.
 
-Dataset
-------------
-The dataset was collected by the Biomedical Optics and Ophthalmic Imaging Laboratory at the University of Illinois at Chicago. This study has been conducted in compliance with the ethical regulations reported in the Declaration of Helsinki and has been authorized by the institutional review board of the University of Illinois at Chicago.
-![The input into MF-AV-Net is a combination of both en face OCT and OCTA, whereas the output is an RGB image of the AV map.](https://github.com/dleninja/multimodal-avnet/blob/main/misc/example_data.png?raw=true)
 
-Images were acquired using the AngioVue SD-OCT device (Optovue, Fremont, CA, USA). The OCT system had a 70,000 Hz A-scan rate with ~5 μm axial and ~15 μm lateral resolutions. All en face OCT/OCTA images used for this study were 6 mm × 6 mm scans; only superficial OCTA images were used. The en face OCT was generated as a 3D projection of the retina slab. After image reconstruction, both en face OCT and OCTA were exported from ReVue software interface (Optovue) for further processing.
 
-Network Architecture
-------------
-The MF-AV-Net is an FCN based on a modified UNet algorithm, which consists of an encoder-decoder architecture. The input to the MF-AV-Net can be of a single channel or a two-channel image. The network architecture presented below represents a late fusion approach that combines the outputs of two networks trained on different imaging modalities, OCT and OCTA, respectively.
-
-![The late stage fusion approach of MF-AV-Net, which employs different expert networks for OCT and OCTA, and combines the output of the two networks.](https://github.com/dleninja/multimodal-avnet/blob/main/misc/figure_Late_fusion.png?raw=true)
 
 Dependencies
 ------------
-- tensorflow >= 1.31.1
-- keras >= 2.2.4
-- python >= 3.7.1
+Ensure you have the following Python packages installed:
+    tensorflow (>= 2.x, compatible with Keras 2.x)
+    keras (>= 2.x)
+    python (>= 3.7.1)
+    numpy
+    pandas
+    scikit-image (skimage)
+    matplotlib
+    opencv-python (cv2)
+
+
+Usage
+------------
+To train the AV-Net model, follow these steps:
+1. Prepare Dataset CSVs
+
+First, generate the train.csv and test.csv files using csv_generator.py. This script scans your dataset directory to create the necessary image lists. Make sure your dataset directory structure is set up as expected (e.g., dataset/oct, dataset/octa, dataset/gt).
+
+python csv_generator.py
+
+2. Run Training
+
+Execute the main.py script to start the training process. You can customize various hyperparameters and paths using command-line arguments:
+
+python main.py \
+    --learning_rate 0.0001 \
+    --epochs 50 \
+    --batch_size 32 \
+    --image_height 320 \
+    --image_width 320 \
+    --n_channels 3 \
+    --dataset_base_path "dataset" \
+    --results_dir "AVNet_Training_Results" \
+    --train_csv "train.csv" \
+    --train_split_ratio 0.8
+
+Command-line Arguments:
+    --learning_rate (float, default: 0.0001): Learning rate for the Adam optimizer.
+    --epochs (int, default: 10): Number of epochs to train the model.
+    --batch_size (int, default: 16): Batch size for training.
+    --image_height (int, default: 320): Height of the input images.
+    --image_width (int, default: 320): Width of the input images.
+    --n_channels (int, default: 3): Number of input channels for the model (e.g., 3 for OCT + OCTA + Ground Truth).
+    --dataset_base_path (str, default: "dataset"): Base path to the dataset directory (e.g., where oct, octa, gt folders reside).
+    --results_dir (str, default: "Results"): Directory to save training results and model checkpoints.
+    --train_csv (str, default: "train.csv"): Path to the CSV file containing training image names, generated by csv_generator.py.
+    --train_split_ratio (float, default: 0.8): Fraction of the dataset to use for training (e.g., 0.8 for 80% train, 20% validation).
 
 Citations
 ------------
