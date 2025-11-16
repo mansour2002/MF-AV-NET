@@ -49,7 +49,7 @@ def main(args):
 
     # Load the AVNet model
     model = avnet_model(
-        block=[6, 12, 24, 16],
+        blocks=[6, 12, 24, 16],
         height=IMAGE_HEIGHT,
         width=IMAGE_WIDTH,
         n_channels=N_CHANNELS
@@ -80,13 +80,12 @@ def main(args):
     # Setup directories for results
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
-    model_file_format = os.path.join(RESULTS_DIR, "dispersion_model.{epoch:03d}.hdf5")
+    model_file_format = os.path.join(RESULTS_DIR, "avnet_model.{epoch:03d}.hdf5")
     checkpointer = ModelCheckpoint(
         filepath=model_file_format,
         monitor='val_loss',
         save_weights_only=True,
         save_best_only=True,
-        period=1,
         verbose=1
     )
 

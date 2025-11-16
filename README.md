@@ -46,7 +46,7 @@ python csv_generator.py
 Execute the main.py script to start the training process. You can customize various hyperparameters and paths using command-line arguments:
 
 ```bash
-python main.py I am running a few minutes late; my previous meeting is running over.
+python main.py \
     --learning_rate 0.0001 \
     --epochs 50 \
     --batch_size 32 \

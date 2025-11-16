@@ -1,0 +1,15 @@
+# MF-AV-NET Requirements
+# Deep Learning Framework
+tensorflow>=2.4.0
+keras>=2.4.0
+
+# Core Dependencies
+numpy>=1.19.0
+pandas>=1.1.0
+
+# Image Processing
+scikit-image>=0.17.0
+opencv-python>=4.5.0
+
+# Visualization
+matplotlib>=3.3.0

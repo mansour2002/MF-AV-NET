@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# TensorFlow / Keras
+*.h5
+*.hdf5
+*.pb
+saved_model/
+checkpoints/
+
+# Training Results
+Results/
+AVNet_Training_Results/
+*.log
+
+# Dataset
+dataset/
+dataset_dir/
+data/
+*.csv
+!requirements.txt
+
+# Model weights
+*.weights
+*.ckpt
+model_weights/
+
+# Temporary files
+*.tmp
+*.bak

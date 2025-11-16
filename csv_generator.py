@@ -10,7 +10,7 @@ found in a specified base directory. It assumes all input channels
 import pandas as pd
 from pathlib import Path
 
-def generate_image_csvs(base_dir_for_filenames="dataset_dir/oct", train_ratio=0.7):
+def generate_image_csvs(base_dir_for_filenames="dataset/oct", train_ratio=0.8):
     """
     Generates train.csv and test.csv files containing image names.
 
@@ -54,5 +54,5 @@ def generate_image_csvs(base_dir_for_filenames="dataset_dir/oct", train_ratio=0.
 
 if __name__ == "__main__":
     # Example usage:
-    # Make sure 'dataset_dir/oct' exists and contains your image files
-    generate_image_csvs(base_dir_for_filenames="dataset_dir/oct", train_ratio=0.8) # Consistent with main.py's split
+    # Make sure 'dataset/oct' exists and contains your image files
+    generate_image_csvs(base_dir_for_filenames="dataset/oct", train_ratio=0.8)
